@@ -1,0 +1,16 @@
+configuration:
+  ma_url:
+    name: Music Assistant URL
+    description: Internal URL for the Music Assistant add-on API.
+  ma_token:
+    name: Music Assistant API token
+    description: Create in Music Assistant -> Settings -> User management -> API tokens.
+  default_player_id:
+    name: Default player ID
+    description: Player ID used when no room is specified in a voice command.
+  player_aliases:
+    name: Player aliases
+    description: JSON map of friendly names to Music Assistant player IDs.
+  port:
+    name: HTTP port
+    description: Port the Alexa skill service listens on inside the container.

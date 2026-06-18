@@ -1,0 +1,41 @@
+name: Music Assistant Alexa Voice
+version: "0.1.0"
+slug: music_assistant_alexa_voice
+description: Voice-control Music Assistant players from Alexa
+url: https://github.com/sickkick/music-assistant-alexa-voice
+arch:
+  - aarch64
+  - amd64
+startup: services
+boot: auto
+init: false
+ports:
+  5000/tcp: 5000
+ports_description:
+  5000/tcp: Alexa skill HTTP endpoint
+webui: http://[HOST]:[PORT:5000]/players
+options:
+  ma_url: http://08524bff_music_assistant:8095
+  ma_token: ""
+  default_player_id: ""
+  player_aliases: "{}"
+  port: 5000
+schema:
+  ma_url:
+    name: Music Assistant URL
+    description: Internal URL for the Music Assistant add-on API
+  ma_token:
+    name: Music Assistant API token
+    description: Create in Music Assistant -> Settings -> User management -> API tokens
+    format: password
+  default_player_id:
+    name: Default player ID
+    description: Player ID used when no room is specified in a voice command
+  player_aliases:
+    name: Player aliases
+    description: JSON map of friendly names to Music Assistant player IDs
+  port:
+    name: HTTP port
+    description: Port the Alexa skill service listens on inside the container
+    format: port
+map: []

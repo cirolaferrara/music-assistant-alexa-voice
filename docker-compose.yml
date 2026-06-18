@@ -1,6 +1,8 @@
 services:
   music-assistant-alexa-voice:
-    build: .
+    build:
+      context: .
+      dockerfile: Dockerfile
     restart: unless-stopped
     ports:
       - "5055:5000"

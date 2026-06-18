@@ -9,11 +9,13 @@ import sys
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
+REPO_ROOT = Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(ROOT))
 
 try:
     from dotenv import load_dotenv
 
+    load_dotenv(REPO_ROOT / ".env")
     load_dotenv(ROOT / ".env")
 except ImportError:
     pass
