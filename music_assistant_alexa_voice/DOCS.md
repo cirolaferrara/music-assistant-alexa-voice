@@ -26,15 +26,69 @@ Voice-control [Music Assistant](https://music-assistant.io) players from Alexa.
 5. Start the add-on
 6. Open the add-on **Open Web UI** link (or `/players`) to verify MA connectivity and copy player IDs
 
-### Expose to Alexa
+## Home Assistant Cloud (recommended for Alexa)
 
-Alexa requires a public HTTPS endpoint. Point your reverse proxy or Cloudflare Tunnel at the add-on port (default **5000**) on your Home Assistant host:
+Alexa needs a public HTTPS endpoint. The easiest way with Home Assistant is **Home Assistant Cloud (Nabu Casa)** plus the included custom integration proxy.
+
+Home Assistant webhooks cannot return Alexa's JSON response, so this project ships a small integration that exposes a synchronous proxy endpoint through Home Assistant itself. That endpoint is reachable remotely through your Nabu Casa URL.
+
+### 1. Enable Home Assistant Cloud
+
+1. Open **Settings → Home Assistant Cloud**
+2. Sign in and enable **Remote Access**
+
+Your remote URL looks like:
 
 ```text
-https://alexa-voice.example.com/alexa
+https://abcdef12.ui.nabu.casa
 ```
 
-Then create the Alexa skill using `music_assistant_alexa_voice/skill/interaction-model/en-US.json` — see the [main README](README.md).
+### 2. Install the custom integration
+
+Choose one:
+
+**Option A — HACS (recommended)**
+
+1. Add this repository as a custom HACS integration repository, or copy `custom_components/music_assistant_alexa_voice` into your `config/custom_components/` folder
+2. Restart Home Assistant
+3. Go to **Settings → Devices & Services → Add Integration**
+4. Search for **Music Assistant Alexa Voice**
+
+**Option B — Manual copy**
+
+1. Copy `custom_components/music_assistant_alexa_voice` to your Home Assistant `config/custom_components/` directory
+2. Restart Home Assistant
+3. Add the integration from **Settings → Devices & Services**
+
+### 3. Configure the integration
+
+| Setting | Value |
+|---|---|
+| **Add-on URL** | `http://music_assistant_alexa_voice:5000` (default) |
+| **Cloud access token** | Create a long random secret string. Alexa will include this in requests. |
+
+The integration validates connectivity by calling the add-on `/health` endpoint, so start the add-on first.
+
+### 4. Alexa skill endpoint
+
+Use your Home Assistant Cloud URL plus the integration path:
+
+```text
+https://YOUR_ID.ui.nabu.casa/api/music_assistant_alexa_voice/alexa?token=YOUR_CLOUD_ACCESS_TOKEN
+```
+
+In the Alexa Developer Console:
+
+1. **Build → Endpoint**
+2. Type: **HTTPS**
+3. URL: the full URL above
+4. Certificate: **My development endpoint is a sub-domain...** (Amazon trust for `*.ui.nabu.casa`)
+
+You do **not** need to expose add-on port 5000 to the internet when using Home Assistant Cloud.
+
+### 5. Create the Alexa skill
+
+Import `music_assistant_alexa_voice/skill/interaction-model/en-US.json` and set invocation name to `music assistant`. See the [main README](../README.md) for the full Alexa Developer Console checklist.
 
 ## Example utterances
 
@@ -48,9 +102,11 @@ Then create the Alexa skill using `music_assistant_alexa_voice/skill/interaction
 | Issue | Fix |
 |---|---|
 | Add-on fails to start | Set `ma_token` and `default_player_id` in the add-on configuration |
+| Integration cannot connect | Start the add-on first and confirm the default add-on URL works internally |
+| Alexa gets 401 | Verify the `token=` query parameter matches the integration access token |
+| Alexa gets 503 | Check add-on logs; the integration could not reach the add-on |
 | Cannot reach Music Assistant | Confirm the Music Assistant add-on is running and `ma_url` uses the correct internal slug |
 | `/players` returns an error | Check the API token and MA URL from the add-on logs |
-| Alexa cannot reach the skill | Verify external HTTPS to port 5000 and endpoint path `/alexa` |
 
 ## Standalone Docker
 

@@ -1,0 +1,5 @@
+{
+  "name": "Music Assistant Alexa Voice",
+  "render_readme": true,
+  "homeassistant": "2023.1.0"
+}

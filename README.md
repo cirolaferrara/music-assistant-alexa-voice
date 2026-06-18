@@ -14,6 +14,23 @@ This repository is a Home Assistant add-on repository. Install it directly in Su
 
 See [music_assistant_alexa_voice/DOCS.md](music_assistant_alexa_voice/DOCS.md) for full add-on setup and troubleshooting.
 
+## Home Assistant Cloud (recommended for Alexa)
+
+Use **Home Assistant Cloud (Nabu Casa)** for external access — no reverse proxy or port forwarding required.
+
+1. Enable **Settings → Home Assistant Cloud → Remote Access**
+2. Install the custom integration from `custom_components/music_assistant_alexa_voice` (HACS or manual copy)
+3. Add the integration and set:
+   - **Add-on URL:** `http://music_assistant_alexa_voice:5000`
+   - **Cloud access token:** a long random secret
+4. Use this Alexa skill endpoint:
+
+```text
+https://YOUR_ID.ui.nabu.casa/api/music_assistant_alexa_voice/alexa?token=YOUR_CLOUD_ACCESS_TOKEN
+```
+
+Full setup details: [music_assistant_alexa_voice/DOCS.md](music_assistant_alexa_voice/DOCS.md)
+
 ## Example utterances
 
 - "Alexa, open music assistant"
@@ -26,8 +43,9 @@ See [music_assistant_alexa_voice/DOCS.md](music_assistant_alexa_voice/DOCS.md) f
 
 ```mermaid
 flowchart LR
-  Echo[Alexa Device] -->|HTTPS| Proxy[Reverse Proxy]
-  Proxy --> Skill[HA Add-on / Docker Service]
+  Echo[Alexa Device] -->|HTTPS| Cloud[Home Assistant Cloud]
+  Cloud --> HA[Home Assistant Integration Proxy]
+  HA --> Skill[Add-on Flask Service]
   Skill -->|HTTP JSON-RPC| MA[Music Assistant API]
   MA --> Player[MA Player]
 ```
@@ -51,25 +69,9 @@ Edit `.env`:
 | `DEFAULT_PLAYER_ID` | Player ID to use when no room is specified |
 | `PLAYER_ALIASES` | Optional JSON map of friendly names → player IDs |
 
-Find player IDs:
+## Alternative: self-hosted HTTPS
 
-```bash
-docker compose run --rm music-assistant-alexa-voice python scripts/list_players.py
-```
-
-Or visit `http://localhost:5055/players`.
-
-## Expose HTTPS for Alexa
-
-Alexa requires a public HTTPS endpoint. Example with Cloudflare Tunnel:
-
-```yaml
-ingress:
-  - hostname: alexa-voice.example.com
-    service: http://homeassistant.local:5000
-```
-
-Your Alexa skill endpoint:
+If you are not using Home Assistant Cloud, expose the add-on or standalone Docker service with your own reverse proxy:
 
 ```text
 https://alexa-voice.example.com/alexa
@@ -81,7 +83,7 @@ https://alexa-voice.example.com/alexa
 2. **Create Skill** → Custom → Provision your own
 3. Import `music_assistant_alexa_voice/skill/interaction-model/en-US.json`
 4. Invocation name: `music assistant`
-5. Endpoint: your public HTTPS URL + `/alexa`
+5. Endpoint: your Home Assistant Cloud URL or self-hosted HTTPS URL
 
 ## Supported commands
 
@@ -99,15 +101,11 @@ https://alexa-voice.example.com/alexa
 
 ```text
 repository.yaml
-music_assistant_alexa_voice/
-  config.yaml        Home Assistant add-on metadata
-  Dockerfile
-  run.sh
-  DOCS.md
-  app/               Flask service
-  skill/             Alexa interaction model
-  scripts/
-docker-compose.yml   Standalone Docker option
+music_assistant_alexa_voice/     Home Assistant add-on
+custom_components/
+  music_assistant_alexa_voice/     HA Cloud proxy integration
+hacs.json
+docker-compose.yml                 Standalone Docker option
 ```
 
 ## Notes

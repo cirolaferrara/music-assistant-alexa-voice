@@ -1,0 +1,21 @@
+{
+  "config": {
+    "step": {
+      "user": {
+        "title": "Music Assistant Alexa Voice",
+        "description": "Proxy Alexa requests to the Music Assistant Alexa Voice add-on through Home Assistant Cloud.",
+        "data": {
+          "addon_url": "Add-on URL",
+          "access_token": "Cloud access token"
+        }
+      }
+    },
+    "error": {
+      "cannot_connect": "Could not reach the add-on health endpoint. Start the add-on first.",
+      "missing_token": "Cloud access token is required."
+    },
+    "abort": {
+      "already_configured": "This integration is already configured."
+    }
+  }
+}

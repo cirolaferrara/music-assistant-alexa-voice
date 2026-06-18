@@ -1,5 +1,5 @@
 name: Music Assistant Alexa Voice
-version: "0.1.0"
+version: "0.1.1"
 slug: music_assistant_alexa_voice
 description: Voice-control Music Assistant players from Alexa
 url: https://github.com/sickkick/music-assistant-alexa-voice
@@ -9,11 +9,11 @@ arch:
 startup: services
 boot: auto
 init: false
-ports:
-  5000/tcp: 5000
-ports_description:
-  5000/tcp: Alexa skill HTTP endpoint
-webui: http://[HOST]:[PORT:5000]/players
+ingress: true
+ingress_port: 5000
+# Port mapping is optional. Home Assistant Cloud access uses the custom integration
+# proxy at /api/music_assistant_alexa_voice/alexa instead of exposing this port.
+ports: {}
 options:
   ma_url: http://08524bff_music_assistant:8095
   ma_token: ""
