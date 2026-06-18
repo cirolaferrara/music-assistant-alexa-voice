@@ -15,6 +15,7 @@ from app.skill.alexa import (
     speech_response,
     with_session_attributes,
 )
+from app.skill.query_parse import split_query_and_room
 
 logger = logging.getLogger(__name__)
 
@@ -55,6 +56,8 @@ class AlexaSkillRouter:
         try:
             if intent_name == "PlayMusicIntent":
                 return self._play_music(body, session_attributes, active_player_id)
+            if intent_name == "PlayInRoomIntent":
+                return self._play_in_room(body, session_attributes, active_player_id)
             if intent_name == "AMAZON.PauseIntent":
                 self._ma.pause(active_player_id)
                 return with_session_attributes(speech_response("Paused."), session_attributes)
@@ -81,7 +84,7 @@ class AlexaSkillRouter:
                 )
             if intent_name == "AMAZON.HelpIntent":
                 return speech_response(
-                    "You can say play Fleetwood Mac, play jazz in the kitchen, pause, resume, stop, next, or previous."
+                    "You can say play Fleetwood Mac, play jazz in the kitchen, play in the kitchen, pause, resume, stop, next, or previous."
                 )
             if intent_name == "AMAZON.FallbackIntent":
                 return speech_response("Sorry, I didn't catch that. Try asking me to play something.")
@@ -114,6 +117,9 @@ class AlexaSkillRouter:
                 session_attributes,
             )
 
+        if not room:
+            query, room = split_query_and_room(query)
+
         player_id, player_name = self._ma.resolve_player(
             room,
             default_player_id=active_player_id,
@@ -129,3 +135,28 @@ class AlexaSkillRouter:
         else:
             text = f"Playing {label}."
         return with_session_attributes(speech_response(text), session_attributes)
+
+    def _play_in_room(
+        self,
+        body: dict[str, Any],
+        session_attributes: dict[str, Any],
+        active_player_id: str,
+    ) -> dict[str, Any]:
+        room = get_slot_value(body, "Room")
+        if not room:
+            return with_session_attributes(
+                speech_response("Which room should I play in?"),
+                session_attributes,
+            )
+
+        player_id, player_name = self._ma.resolve_player(
+            room,
+            default_player_id=active_player_id,
+            aliases=self._settings.player_aliases,
+        )
+        self._ma.play(player_id)
+        session_attributes["active_player_id"] = player_id
+        return with_session_attributes(
+            speech_response(f"Playing on {player_name}."),
+            session_attributes,
+        )

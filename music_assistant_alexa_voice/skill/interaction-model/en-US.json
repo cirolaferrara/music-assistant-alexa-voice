@@ -9,23 +9,33 @@
             {
               "name": "Query",
               "type": "AMAZON.SearchQuery"
-            },
+            }
+          ],
+          "samples": [
+            "play {Query}",
+            "start {Query}",
+            "start playing {Query}",
+            "play music by {Query}",
+            "play songs by {Query}",
+            "play the album {Query}",
+            "play the playlist {Query}"
+          ]
+        },
+        {
+          "name": "PlayInRoomIntent",
+          "slots": [
             {
               "name": "Room",
               "type": "AMAZON.Room"
             }
           ],
           "samples": [
-            "play {Query}",
-            "play {Query} in the {Room}",
-            "play {Query} in {Room}",
-            "start {Query}",
-            "start playing {Query}",
-            "play music by {Query}",
-            "play songs by {Query}",
-            "play the album {Query}",
-            "play the playlist {Query}",
-            "play {Query} on {Room}"
+            "play in {Room}",
+            "play in the {Room}",
+            "play music in {Room}",
+            "play music in the {Room}",
+            "resume in {Room}",
+            "resume in the {Room}"
           ]
         },
         {
