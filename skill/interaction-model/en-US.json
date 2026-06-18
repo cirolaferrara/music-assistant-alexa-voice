@@ -1,0 +1,87 @@
+{
+  "interactionModel": {
+    "languageModel": {
+      "invocationName": "music assistant",
+      "intents": [
+        {
+          "name": "PlayMusicIntent",
+          "slots": [
+            {
+              "name": "Query",
+              "type": "AMAZON.SearchQuery"
+            },
+            {
+              "name": "Room",
+              "type": "AMAZON.Room"
+            }
+          ],
+          "samples": [
+            "play {Query}",
+            "play {Query} in the {Room}",
+            "play {Query} in {Room}",
+            "start {Query}",
+            "start playing {Query}",
+            "play music by {Query}",
+            "play songs by {Query}",
+            "play the album {Query}",
+            "play the playlist {Query}",
+            "play {Query} on {Room}"
+          ]
+        },
+        {
+          "name": "NextTrackIntent",
+          "slots": [],
+          "samples": [
+            "next",
+            "next song",
+            "next track",
+            "skip",
+            "skip song",
+            "skip track"
+          ]
+        },
+        {
+          "name": "PreviousTrackIntent",
+          "slots": [],
+          "samples": [
+            "previous",
+            "previous song",
+            "previous track",
+            "go back",
+            "last song",
+            "last track"
+          ]
+        },
+        {
+          "name": "AMAZON.PauseIntent",
+          "samples": []
+        },
+        {
+          "name": "AMAZON.ResumeIntent",
+          "samples": []
+        },
+        {
+          "name": "AMAZON.StopIntent",
+          "samples": []
+        },
+        {
+          "name": "AMAZON.CancelIntent",
+          "samples": []
+        },
+        {
+          "name": "AMAZON.HelpIntent",
+          "samples": [
+            "help",
+            "what can I say",
+            "what can you do"
+          ]
+        },
+        {
+          "name": "AMAZON.FallbackIntent",
+          "samples": []
+        }
+      ],
+      "types": []
+    }
+  }
+}
