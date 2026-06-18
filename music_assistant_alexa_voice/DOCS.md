@@ -101,6 +101,7 @@ Import `music_assistant_alexa_voice/skill/interaction-model/en-US.json` and set 
 
 | Issue | Fix |
 |---|---|
+| Add-on repo added but nothing appears | Use the `main` branch URL with no `#branch` suffix. Supervisor cannot use branch names containing `/`. Remove the repo, add `https://github.com/sickkick/music-assistant-alexa-voice`, then refresh the add-on store |
 | Add-on fails to start | Set `ma_token` and `default_player_id` in the add-on configuration |
 | Integration cannot connect | Start the add-on first and confirm the default add-on URL works internally |
 | Alexa gets 401 | Verify the `token=` query parameter matches the integration access token |

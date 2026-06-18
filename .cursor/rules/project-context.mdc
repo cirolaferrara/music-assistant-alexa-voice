@@ -1,0 +1,25 @@
+---
+description: Music Assistant Alexa Voice project context and conventions
+alwaysApply: true
+---
+
+# music-assistant-alexa-voice
+
+Read `CONTEXT.md` at the repo root before making changes. It contains architecture, HA add-on + Cloud setup, and open items.
+
+## Stack
+
+- **Add-on:** Flask + gunicorn in `music_assistant_alexa_voice/`, options via bashio `/data/options.json`
+- **Cloud access:** custom integration `custom_components/music_assistant_alexa_voice/` proxies `/api/music_assistant_alexa_voice/alexa` to the add-on (do not use HA webhooks for Alexa — they cannot return skill JSON)
+- **MA API:** HTTP JSON-RPC POST to `{MA_URL}/api` with Bearer token
+
+## Conventions
+
+- Single source of app code lives under `music_assistant_alexa_voice/app/`
+- Do not expose add-on port 5000 on the host by default; use ingress + HA Cloud integration
+- Commits: conventional commits, no `Co-authored-by: Cursor` trailer
+- Minimize scope; match existing Flask/bashio/HA integration patterns
+
+## Alexa endpoint (HA Cloud)
+
+`https://YOUR_ID.ui.nabu.casa/api/music_assistant_alexa_voice/alexa?token=TOKEN`
