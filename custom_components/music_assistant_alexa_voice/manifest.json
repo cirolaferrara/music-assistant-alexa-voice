@@ -3,7 +3,7 @@
   "name": "Music Assistant Alexa Voice",
   "codeowners": ["@sickkick"],
   "config_flow": true,
-  "documentation": "https://github.com/sickkick/music-assistant-alexa-voice",
+  "documentation": "https://github.com/Shaffer-Softworks/music-assistant-alexa-voice",
   "integration_type": "service",
   "iot_class": "local_polling",
   "requirements": [],

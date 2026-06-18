@@ -2,7 +2,7 @@ name: Music Assistant Alexa Voice
 version: "0.1.2"
 slug: music_assistant_alexa_voice
 description: Voice-control Music Assistant players from Alexa
-url: https://github.com/sickkick/music-assistant-alexa-voice
+url: https://github.com/Shaffer-Softworks/music-assistant-alexa-voice
 arch:
   - aarch64
   - amd64

@@ -12,7 +12,7 @@ Example: *"Alexa, ask music assistant to play Fleetwood Mac in the kitchen"*
 
 ## Repository
 
-- **GitHub:** https://github.com/sickkick/music-assistant-alexa-voice
+- **GitHub:** https://github.com/Shaffer-Softworks/music-assistant-alexa-voice
 - **Branch:** `cursor/music-assistant-alexa-voice-skill`
 - **Owner GitHub:** sickkick
 - **Owner HA:** Music Assistant installed (Home Assistant add-on), players include Sat1 / Satellite / RackPi / OfficePi
@@ -74,7 +74,7 @@ README.md
 ### Install
 
 1. Settings → Add-ons → Add-on Store → ⋮ → Custom repositories
-2. Add: `https://github.com/sickkick/music-assistant-alexa-voice`
+2. Add: `https://github.com/Shaffer-Softworks/music-assistant-alexa-voice`
 3. Install **Music Assistant Alexa Voice**
 
 ### Add-on options

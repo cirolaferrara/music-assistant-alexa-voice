@@ -10,7 +10,7 @@ Voice-control [Music Assistant](https://music-assistant.io) players from Alexa.
 2. Add this repository URL:
 
    ```text
-   https://github.com/sickkick/music-assistant-alexa-voice
+   https://github.com/Shaffer-Softworks/music-assistant-alexa-voice
    ```
 
 3. Refresh the add-on store and install **Music Assistant Alexa Voice**
@@ -101,7 +101,7 @@ Import `music_assistant_alexa_voice/skill/interaction-model/en-US.json` and set 
 
 | Issue | Fix |
 |---|---|
-| Add-on repo added but nothing appears | Use the `main` branch URL with no `#branch` suffix. Supervisor cannot use branch names containing `/`. Remove the repo, add `https://github.com/sickkick/music-assistant-alexa-voice`, then refresh the add-on store |
+| Add-on repo added but nothing appears | Use the `main` branch URL with no `#branch` suffix. Supervisor cannot use branch names containing `/`. Remove the repo, add `https://github.com/Shaffer-Softworks/music-assistant-alexa-voice`, then refresh the add-on store |
 | Add-on fails to start | Set `ma_token` and `default_player_id` in the add-on configuration |
 | Integration cannot connect | Start the add-on first and confirm the default add-on URL works internally |
 | Alexa gets 401 | Verify the `token=` query parameter matches the integration access token |
