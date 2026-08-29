@@ -18,13 +18,13 @@ Voice-control [Music Assistant](https://music-assistant.io) players from Alexa.
 
    | Option | Description |
    |---|---|
-   | **Music Assistant URL** | Internal MA API URL. Default `http://08524bff_music_assistant:8095` works if you use the official Music Assistant add-on. If yours uses a different slug, open the Music Assistant add-on **Info** page and use `http://<slug>:8095`. |
+   | **Music Assistant URL** | Internal MA API URL. Default `http://d5369777-music-assistant:8095` matches the official Music Assistant app hostname (hyphenated). If yours differs, open the Music Assistant app **Info** page and use `http://<hostname>:8095`. |
    | **Music Assistant API token** | Create in MA → Settings → User management → API tokens |
    | **Default player ID** | Player ID from MA → Settings → Players |
    | **Player aliases** | Optional JSON map, e.g. `{"kitchen":"player-id","satellite":"other-id"}` |
 
 5. Start the add-on
-6. Open the add-on **Open Web UI** link (or `/players`) to verify MA connectivity and copy player IDs
+6. Open the add-on **Open Web UI** link to verify MA connectivity and copy player IDs (JSON also available at `players`)
 
 ## Home Assistant Cloud (recommended for Alexa)
 

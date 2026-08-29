@@ -81,7 +81,7 @@ README.md
 
 | Option | Purpose |
 |---|---|
-| `ma_url` | Internal MA API URL (default `http://08524bff_music_assistant:8095`) |
+| `ma_url` | Internal MA API URL (default `http://d5369777-music-assistant:8095`) |
 | `ma_token` | MA API bearer token |
 | `default_player_id` | Default MA player queue ID |
 | `player_aliases` | JSON map of room names → player IDs |

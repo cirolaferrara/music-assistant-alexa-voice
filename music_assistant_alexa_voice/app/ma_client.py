@@ -40,11 +40,19 @@ class MusicAssistantClient:
         )
         response.raise_for_status()
         body = response.json()
+        # MA 2.x HTTP may return a bare result (list/dict) or a wrapped
+        # {"message_id", "result"} / error payload.
+        if isinstance(body, list):
+            return body
+        if not isinstance(body, dict):
+            return body
         if "error" in body:
             raise MusicAssistantError(body["error"])
         if "error_code" in body:
             raise MusicAssistantError(body.get("details") or body["error_code"])
-        return body.get("result")
+        if "result" in body:
+            return body.get("result")
+        return body
 
     def list_players(self) -> list[dict[str, Any]]:
         result = self.command("players/all")

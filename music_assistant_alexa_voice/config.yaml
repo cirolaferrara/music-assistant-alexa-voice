@@ -1,5 +1,5 @@
 name: Music Assistant Alexa Voice
-version: "0.1.3"
+version: "0.1.4"
 slug: music_assistant_alexa_voice
 description: Voice-control Music Assistant players from Alexa
 url: https://github.com/Shaffer-Softworks/music-assistant-alexa-voice
@@ -12,7 +12,7 @@ init: false
 ingress: true
 ingress_port: 5000
 options:
-  ma_url: http://08524bff_music_assistant:8095
+  ma_url: http://d5369777-music-assistant:8095
   ma_token: ""
   default_player_id: ""
   player_aliases: "{}"

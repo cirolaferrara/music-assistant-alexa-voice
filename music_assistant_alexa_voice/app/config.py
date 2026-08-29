@@ -54,7 +54,7 @@ class Settings:
         options = _load_ha_options()
 
         ma_url = _option(options, "ma_url") or os.environ.get(
-            "MA_URL", "http://08524bff_music_assistant:8095"
+            "MA_URL", "http://d5369777-music-assistant:8095"
         )
         ma_url = ma_url.rstrip("/")
 

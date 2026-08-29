@@ -11,7 +11,7 @@ if [ -f /data/options.json ]; then
   export PLAYER_ALIASES="$(bashio::config 'player_aliases')"
   export PORT="$(bashio::config 'port')"
 else
-  export MA_URL="${MA_URL:-http://08524bff_music_assistant:8095}"
+  export MA_URL="${MA_URL:-http://d5369777-music-assistant:8095}"
   export MA_TOKEN="${MA_TOKEN:-}"
   export DEFAULT_PLAYER_ID="${DEFAULT_PLAYER_ID:-}"
   export PLAYER_ALIASES="${PLAYER_ALIASES:-{}}"

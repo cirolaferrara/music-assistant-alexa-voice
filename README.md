@@ -10,7 +10,7 @@ This repository is a Home Assistant add-on repository. Install it directly in Su
 2. Add: `https://github.com/Shaffer-Softworks/music-assistant-alexa-voice`
 3. Install **Music Assistant Alexa Voice**
 4. Configure `ma_token`, `default_player_id`, and verify `ma_url`
-5. Start the add-on and open **Open Web UI** to test `/players`
+5. Start the add-on and open **Open Web UI** to verify players / MA connectivity
 
 See [music_assistant_alexa_voice/DOCS.md](music_assistant_alexa_voice/DOCS.md) for full add-on setup and troubleshooting.
 
