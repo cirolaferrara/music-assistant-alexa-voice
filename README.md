@@ -81,7 +81,7 @@ https://alexa-voice.example.com/alexa
 
 1. Open the [Alexa Developer Console](https://developer.amazon.com/alexa/console/ask)
 2. **Create Skill** → Custom → Provision your own
-3. Import `music_assistant_alexa_voice/skill/interaction-model/en-US.json`
+3. Import `music_assistant_alexa_voice/skill/interaction-model/it-IT.json`
 4. Invocation name: `music assistant`
 5. Endpoint: your Home Assistant Cloud URL or self-hosted HTTPS URL
 
