@@ -1,0 +1,167 @@
+{
+    "interactionModel": {
+        "languageModel": {
+            "invocationName": "musica casa",
+            "intents": [
+                {
+                    "name": "PlayMusicIntent",
+                    "slots": [
+                        {
+                            "name": "Query",
+                            "type": "AMAZON.SearchQuery"
+                        }
+                    ],
+                    "samples": [
+                        "riproduci {Query}",
+                        "suona {Query}",
+                        "fai partire {Query}",
+                        "fai suonare {Query}",
+                        "avvia {Query}",
+                        "riproduci musica di {Query}",
+                        "riproduci canzoni di {Query}",
+                        "riproduci l'album {Query}",
+                        "riproduci la playlist {Query}",
+                        "riprodurre {Query}",
+                        "suonare {Query}",
+                        "far partire {Query}",
+                        "ascoltare {Query}",
+                        "riprodurre musica di {Query}",
+                        "riprodurre l'album {Query}",
+                        "riprodurre la playlist {Query}"
+                    ]
+                },
+                {
+                    "name": "PlayInRoomIntent",
+                    "slots": [
+                        {
+                            "name": "Room",
+                            "type": "ROOM_TYPE"
+                        }
+                    ],
+                    "samples": [
+                        "riprendi in {Room}",
+                        "riprendi nel {Room}",
+                        "riprendi nella {Room}",
+                        "riprendere in {Room}",
+                        "riprendere nel {Room}",
+                        "riprendere nella {Room}"
+                    ]
+                },
+                {
+                    "name": "NextTrackIntent",
+                    "slots": [],
+                    "samples": [
+                        "avanti",
+                        "prossima",
+                        "prossima canzone",
+                        "prossimo brano",
+                        "salta",
+                        "salta canzone",
+                        "salta brano",
+                        "andare avanti",
+                        "passare al prossimo brano",
+                        "saltare"
+                    ]
+                },
+                {
+                    "name": "PreviousTrackIntent",
+                    "slots": [],
+                    "samples": [
+                        "indietro",
+                        "precedente",
+                        "canzone precedente",
+                        "brano precedente",
+                        "torna indietro",
+                        "ultima canzone",
+                        "tornare indietro",
+                        "passare al brano precedente"
+                    ]
+                },
+                {
+                    "name": "AMAZON.PauseIntent",
+                    "samples": []
+                },
+                {
+                    "name": "AMAZON.ResumeIntent",
+                    "samples": []
+                },
+                {
+                    "name": "AMAZON.StopIntent",
+                    "samples": []
+                },
+                {
+                    "name": "AMAZON.CancelIntent",
+                    "samples": []
+                },
+                {
+                    "name": "AMAZON.HelpIntent",
+                    "samples": [
+                        "aiuto",
+                        "cosa posso dire",
+                        "cosa sai fare"
+                    ]
+                },
+                {
+                    "name": "AMAZON.FallbackIntent",
+                    "samples": []
+                },
+                {
+                    "name": "AMAZON.NavigateHomeIntent",
+                    "samples": []
+                }
+            ],
+            "types": [
+                {
+                    "name": "ROOM_TYPE",
+                    "values": [
+                        {
+                            "name": {
+                                "value": "cucina"
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "salotto"
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "soggiorno"
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "camera"
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "camera da letto"
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "bagno"
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "studio"
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "garage"
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "terrazzo"
+                            }
+                        }
+                    ]
+                }
+            ]
+        }
+    }
+}
