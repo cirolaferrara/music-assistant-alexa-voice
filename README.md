@@ -7,7 +7,7 @@ Voice-control [Music Assistant](https://music-assistant.io) from Alexa. This ski
 This repository is a Home Assistant add-on repository. Install it directly in Supervisor:
 
 1. **Settings → Add-ons → Add-on Store → ⋮ → Custom repositories**
-2. Add: `https://github.com/Shaffer-Softworks/music-assistant-alexa-voice`
+2. Add: `https://github.com/cirolaferrara/music-assistant-alexa-voice`
 3. Install **Music Assistant Alexa Voice**
 4. Configure `ma_token`, `default_player_id`, and verify `ma_url`
 5. Start the add-on and open **Open Web UI** to verify players / MA connectivity
