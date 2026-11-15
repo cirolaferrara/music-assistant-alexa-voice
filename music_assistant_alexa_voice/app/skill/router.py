@@ -39,7 +39,7 @@ class AlexaSkillRouter:
             session_attributes["active_player_id"] = player_id
             return with_session_attributes(
                 speech_response(
-                    f"Music Assistant is ready. Ask me to play something on {player_name}."
+                    f"Music Assistant è pronto. Dimmi cosa vuoi ascoltare su {player_name}."
                 ),
                 session_attributes,
             )
@@ -49,7 +49,7 @@ class AlexaSkillRouter:
 
         intent_name = get_intent_name(body)
         if not intent_name:
-            return speech_response("Sorry, I didn't understand that.")
+            return speech_response("Scusa, non ho capito.")
 
         active_player_id = session_attributes.get("active_player_id") or self._settings.default_player_id
 
@@ -60,48 +60,49 @@ class AlexaSkillRouter:
                 return self._play_in_room(body, session_attributes, active_player_id)
             if intent_name == "AMAZON.PauseIntent":
                 self._ma.pause(active_player_id)
-                return with_session_attributes(speech_response("Paused."), session_attributes)
+                return with_session_attributes(speech_response("In pausa."), session_attributes)
             if intent_name == "AMAZON.ResumeIntent":
                 self._ma.play(active_player_id)
                 return with_session_attributes(
-                    speech_response("Resuming playback."),
+                    speech_response("Riprendo la riproduzione."),
                     session_attributes,
                 )
             if intent_name in {"AMAZON.StopIntent", "AMAZON.CancelIntent"}:
                 self._ma.stop(active_player_id)
-                return with_session_attributes(speech_response("Stopped."), session_attributes)
+                return with_session_attributes(speech_response("Fermato."), session_attributes)
             if intent_name == "NextTrackIntent":
                 self._ma.next_track(active_player_id)
                 return with_session_attributes(
-                    speech_response("Skipping to the next track."),
+                    speech_response("Passo al brano successivo."),
                     session_attributes,
                 )
             if intent_name == "PreviousTrackIntent":
                 self._ma.previous_track(active_player_id)
                 return with_session_attributes(
-                    speech_response("Going back to the previous track."),
+                    speech_response("Torno al brano precedente."),
                     session_attributes,
                 )
             if intent_name == "AMAZON.HelpIntent":
                 return speech_response(
-                    "You can say play Fleetwood Mac, play jazz in the kitchen, play in the kitchen, pause, resume, stop, next, or previous."
+                    "Puoi dire: riproduci Fleetwood Mac, riproduci jazz in cucina, "
+                    "riproduci in cucina, pausa, riprendi, stop, avanti o indietro."
                 )
             if intent_name == "AMAZON.FallbackIntent":
-                return speech_response("Sorry, I didn't catch that. Try asking me to play something.")
+                return speech_response("Scusa, non ho capito. Prova a chiedermi di riprodurre qualcosa.")
         except MusicAssistantError as exc:
             logger.warning("Intent %s failed: %s", intent_name, exc)
             return with_session_attributes(
-                speech_response(f"Sorry, I couldn't do that. {exc}"),
+                speech_response(f"Scusa, non sono riuscito a farlo. {exc}"),
                 session_attributes,
             )
         except Exception:
             logger.exception("Unexpected Alexa intent failure: %s", intent_name)
             return with_session_attributes(
-                speech_response("Sorry, something went wrong talking to Music Assistant."),
+                speech_response("Scusa, qualcosa è andato storto nella comunicazione con Music Assistant."),
                 session_attributes,
             )
 
-        return speech_response("Sorry, I didn't understand that.")
+        return speech_response("Scusa, non ho capito.")
 
     def _play_music(
         self,
@@ -113,7 +114,7 @@ class AlexaSkillRouter:
         room = get_slot_value(body, "Room")
         if not query:
             return with_session_attributes(
-                speech_response("What would you like me to play?"),
+                speech_response("Cosa vuoi che riproduca?"),
                 session_attributes,
             )
 
@@ -131,9 +132,9 @@ class AlexaSkillRouter:
         session_attributes["active_player_id"] = player_id
 
         if room:
-            text = f"Playing {label} on {player_name}."
+            text = f"Riproduco {label} su {player_name}."
         else:
-            text = f"Playing {label}."
+            text = f"Riproduco {label}."
         return with_session_attributes(speech_response(text), session_attributes)
 
     def _play_in_room(
@@ -145,7 +146,7 @@ class AlexaSkillRouter:
         room = get_slot_value(body, "Room")
         if not room:
             return with_session_attributes(
-                speech_response("Which room should I play in?"),
+                speech_response("In quale stanza devo riprodurre?"),
                 session_attributes,
             )
 
@@ -157,6 +158,7 @@ class AlexaSkillRouter:
         self._ma.play(player_id)
         session_attributes["active_player_id"] = player_id
         return with_session_attributes(
-            speech_response(f"Playing on {player_name}."),
+            speech_response(f"Riproduco su {player_name}."),
             session_attributes,
         )
+
